@@ -5,4 +5,4 @@
 5. ex. 벌칙: 커피 (벌칙 없어도 되거)
 
 ## 백준 링크
-// 채울 예정
+[1주차 백준 문제 모음 (BFS/DFS)](https://www.acmicpc.net/group/workbook/view/16953/54342)
