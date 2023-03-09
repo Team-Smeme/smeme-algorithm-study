@@ -18,3 +18,4 @@
 ## 백준 링크
 [스밈 백준 문제집 링크](https://www.acmicpc.net/group/workbook/16953) <br/>
 [1주차 백준 문제 모음 (BFS/DFS)](https://www.acmicpc.net/group/workbook/view/16953/54396) | 2.27 ~ 3.5 <br/>
+[2주차 백준 문제 모음 (BFS/DFS)](https://www.acmicpc.net/group/practice/view/16953/4) | 3.6 ~ 3.12 <br/>
