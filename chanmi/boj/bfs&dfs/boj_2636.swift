@@ -10,14 +10,14 @@
 let input = readLine()!.split(separator: " ").map{Int(String($0))!}
 let height = input[0]
 let width = input[1]
-var cheezeGraph = [[Int]]()
+var cheeseGraph = [[Int]]()
 var visited = Array(repeating: Array(repeating: false, count: width), count: height)
 var cheeseCount = [Int]()
 var queue = [(Int, Int)]()
 var count = 0
 
 for _ in 0..<height {
-    cheezeGraph.append(readLine()!.split(separator: " ").map{Int(String($0))!})
+    cheeseGraph.append(readLine()!.split(separator: " ").map{Int(String($0))!})
 }
 
 let dx = [-1, 1, 0, 0]
@@ -41,12 +41,12 @@ func bfs() -> Int {
             
             if 0..<width ~= nx && 0..<height ~= ny && !visited[ny][nx] {
                 // 공기일 때
-                if cheezeGraph[ny][nx] == 0 {
+                if cheeseGraph[ny][nx] == 0 {
                     queue.append((ny, nx))
                     visited[ny][nx] = true
-                } else if cheezeGraph[ny][nx] == 1 {
+                } else if cheeseGraph[ny][nx] == 1 {
                     visited[ny][nx] = true
-                    cheezeGraph[ny][nx] = 0
+                    cheeseGraph[ny][nx] = 0
                     count += 1
                 }
             }
