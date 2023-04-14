@@ -2,12 +2,12 @@ package week7;
 
 import java.util.*;
 
-class Position {
+class Position2 {
 	int x;
 	int y;
 	int n;
 
-	Position(int x, int y, int n) {
+	Position2(int x, int y, int n) {
 		this.x = x;
 		this.y = y;
 		this.n = n;
@@ -29,15 +29,15 @@ public class prgrms14 {
 	}
 
 	private int bfs(int x, int y, int[][] maps) {
-		Queue<Position> queue = new LinkedList<>();
-		queue.add(new Position(x, y, 1));
+		Queue<Position2> queue = new LinkedList<>();
+		queue.add(new Position2(x, y, 1));
 		visited[x][y] = true;
 
 		int[] dx = {1, -1, 0, 0};
 		int[] dy = {0, 0, 1, -1};
 
 		while (!queue.isEmpty()) {
-			Position cur = queue.remove();
+			Position2 cur = queue.remove();
 
 			if (cur.x == N-1 && cur.y == M-1) return cur.n;
 
@@ -48,7 +48,7 @@ public class prgrms14 {
 				if (0 <= nx && nx < N && 0 <= ny && ny < M) {
 					if (visited[nx][ny] || maps[nx][ny] == 0) continue;
 					visited[nx][ny] = true;
-					queue.add(new Position(nx, ny, cur.n+1));
+					queue.add(new Position2(nx, ny, cur.n+1));
 				}
 			}
 		}
