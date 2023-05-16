@@ -81,3 +81,61 @@ func solution_Version_Set(_ array: [Int]) -> [Int] {
 print(solution_Version_Set([1, 2, 3, 3, 3, 3, 4, 4])) // [4, 2]
 print(solution_Version_Set([3, 2, 4, 4, 2, 5, 2, 5, 5])) // [3, 2, 3]
 print(solution_Version_Set([3, 5, 7, 9, 1])) // [-1]
+
+func solution_version_array(_ array: [Int]) -> [Int] {
+    var orderAndCountArray = Array(repeating: (order: 0, count: 0), count: 101)
+    
+    var order = 1
+    
+    func sameValueCount(_ array: [Int]) {
+        for i in stride(from: 1, to: array.count, by: 2) {
+            let first = array[i-1]
+            let second = array[i]
+            let (firstTempOrder, firstTempCount) = orderAndCountArray[first]
+            let (secondTempOrder, secondTempCount) = orderAndCountArray[second]
+            if first == second {
+                if (firstTempOrder, firstTempCount) == (0, 0) {
+                    orderAndCountArray[first] = (order, firstTempCount+2)
+                    order += 1
+                } else {
+                    orderAndCountArray[first] = (firstTempOrder, firstTempCount+2)
+                }
+            } else {
+                if (firstTempOrder, firstTempCount) == (0, 0) {
+                    orderAndCountArray[first] = (order, firstTempCount+1)
+                    order += 1
+                } else {
+                    orderAndCountArray[first] = (firstTempOrder, firstTempCount+1)
+                }
+                
+                if (secondTempOrder, secondTempCount) == (0, 0) {
+                    orderAndCountArray[second] = (order, secondTempCount+1)
+                    order += 1
+                } else {
+                    orderAndCountArray[second] = (secondTempOrder, secondTempCount+1)
+                }
+            }
+        }
+    }
+    
+    sameValueCount(array)
+    
+    if array.count % 2 != 0 {
+        let last = array[array.count-1]
+        let (lastOrder, lastCount) = orderAndCountArray[last]
+        if (lastOrder, lastCount) == (0, 0) {
+            orderAndCountArray[last] = (order, lastCount+1)
+            order += 1
+        } else {
+            orderAndCountArray[last] = (lastOrder, lastCount+1)
+        }
+    }
+    
+    let resultArray = orderAndCountArray.filter { $0.count > 1}.sorted(by: { $0.order < $1.order}).map { $0.count }
+    
+    return resultArray.isEmpty ? [-1] : resultArray
+}
+
+print(solution_version_array([1, 2, 3, 3, 3, 3, 4, 4])) // [4, 2]
+print(solution_version_array([3, 2, 4, 4, 2, 5, 2, 5, 5])) // [3, 2, 3]
+print(solution_version_array([3, 5, 7, 9, 1])) // [-1]
