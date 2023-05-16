@@ -51,3 +51,33 @@ func solution_Version_Dictionary(_ array: [Int]) -> [Int] {
 print(solution_Version_Dictionary([1, 2, 3, 3, 3, 3, 4, 4])) // [4, 2]
 print(solution_Version_Dictionary([3, 2, 4, 4, 2, 5, 2, 5, 5])) // [3, 2, 3]
 print(solution_Version_Dictionary([3, 5, 7, 9, 1])) // [-1]
+
+func solution_Version_Set(_ array: [Int]) -> [Int] {
+    var set: Set<Int> = []
+    var orderAndCountArray = Array(repeating: (order: 0, count: 0), count: 101)
+    
+    func sameValueCount(_ array: [Int]) {
+        var order = 1
+        for i in 0..<array.count {
+            let number = array[i]
+            
+            if let temp = set.update(with: number) {
+                let (tempOrder, tempCount) = orderAndCountArray[temp]
+                orderAndCountArray[temp] = (order: tempOrder, count: tempCount+1)
+                continue
+            }
+            orderAndCountArray[number] = (order: order, count: 1)
+            order += 1
+        }
+    }
+    
+    sameValueCount(array)
+    
+    let resultArray = orderAndCountArray.filter { $0.count > 1 }.sorted(by: { $0.order < $1.order }).map{ $0.count }
+
+    return resultArray.isEmpty ? [-1] : resultArray
+}
+
+print(solution_Version_Set([1, 2, 3, 3, 3, 3, 4, 4])) // [4, 2]
+print(solution_Version_Set([3, 2, 4, 4, 2, 5, 2, 5, 5])) // [3, 2, 3]
+print(solution_Version_Set([3, 5, 7, 9, 1])) // [-1]
